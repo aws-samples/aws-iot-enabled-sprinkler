@@ -1,0 +1,6 @@
+{
+    "task": "UPDATE_DEVICE_ROOTCA_CERTIFICATE",
+    "payload": {
+        "url": "https://www.amazontrust.com/repository/AmazonRootCA1.pem"
+    }
+}

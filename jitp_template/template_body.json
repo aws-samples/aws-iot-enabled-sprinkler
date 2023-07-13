@@ -1,0 +1,41 @@
+{
+    "Parameters": {
+        "AWS::IoT::Certificate::CommonName": {
+            "Type": "String"
+        },
+        "AWS::IoT::Certificate::Id": {
+            "Type": "String"
+        },
+        "AWS::IoT::Certificate::Country": {
+            "Type": "String"
+        }
+    },
+    "Resources": {
+        "certificate": {
+            "Type": "AWS::IoT::Certificate",
+            "Properties": {
+                "CertificateId": {
+                    "Ref": "AWS::IoT::Certificate::Id"
+                },
+                "Status": "ACTIVE"
+            }
+        },
+        "thing": {
+            "Type": "AWS::IoT::Thing",
+            "Properties": {
+                "ThingName": {
+                    "Ref": "AWS::IoT::Certificate::CommonName"
+                },
+                "AttributePayload": {
+                    "country": {
+                        "Ref": "AWS::IoT::Certificate::Country"
+                    }
+                },
+                "ThingTypeName": "IES_IotEnabledSprinkler",
+                "ThingGroups": [
+                    "IES_IotEnabledSprinklers"
+                ]
+            }
+        }
+    }
+}

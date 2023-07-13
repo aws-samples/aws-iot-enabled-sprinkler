@@ -1,0 +1,59 @@
+{
+    "Parameters": {
+        "CertificateCreatedOn": {
+            "Type": "String"
+        },
+        "SerialNumber": {
+            "Type": "String"
+        },
+        "AWS::IoT::Certificate::Id": {
+            "Type": "String"
+        },
+        "SensorType": {
+            "Type": "String"
+        },
+        "PlantId": {
+            "Type": "String"
+        },
+        "FirmwareVersion": {
+            "Type": "String"
+        }
+    },
+    "Resources": {
+        "certificate": {
+            "Type": "AWS::IoT::Certificate",
+            "Properties": {
+                "CertificateId": {
+                    "Ref": "AWS::IoT::Certificate::Id"
+                },
+                "Status": "Active"
+            }
+        },
+        "thing": {
+            "Type": "AWS::IoT::Thing",
+            "Properties": {
+                "AttributePayload": {
+                    "FirmwareVersion": {
+                        "Ref": "FirmwareVersion"
+                    },
+                    "SensorType": {
+                        "Ref": "SensorType"
+                    },
+                    "PlantId": {
+                        "Ref": "PlantId"
+                    },
+                    "CertificateCreatedOn": {
+                        "Ref": "CertificateCreatedOn"
+                    }
+                },
+                "ThingTypeName": "thing_type_name",
+                "ThingName": {
+                    "Ref": "SerialNumber"
+                },
+                "ThingGroups": [
+                    "group_name"
+                ]
+            }
+        }
+    }
+}

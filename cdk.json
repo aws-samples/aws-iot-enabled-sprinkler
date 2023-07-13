@@ -1,0 +1,180 @@
+{
+  "app": "python3 app.py",
+  "watch": {
+    "include": [
+      "**"
+    ],
+    "exclude": [
+      "README.md",
+      "cdk*.json",
+      "requirements*.txt",
+      "source.bat",
+      "**/__init__.py",
+      "python/__pycache__",
+      "tests"
+    ]
+  },
+  "context": {
+    "@aws-cdk/aws-lambda:recognizeLayerVersion": true,
+    "@aws-cdk/core:checkSecretUsage": true,
+    "@aws-cdk/core:target-partitions": [
+      "aws",
+      "aws-cn"
+    ],
+    "@aws-cdk-containers/ecs-service-extensions:enableDefaultLogDriver": true,
+    "@aws-cdk/aws-ec2:uniqueImdsv2TemplateName": true,
+    "@aws-cdk/aws-ecs:arnFormatIncludesClusterName": true,
+    "@aws-cdk/aws-iam:minimizePolicies": true,
+    "@aws-cdk/core:validateSnapshotRemovalPolicy": true,
+    "@aws-cdk/aws-codepipeline:crossAccountKeyAliasStackSafeResourceName": true,
+    "@aws-cdk/aws-s3:createDefaultLoggingPolicy": true,
+    "@aws-cdk/aws-sns-subscriptions:restrictSqsDescryption": true,
+    "@aws-cdk/aws-apigateway:disableCloudWatchRole": true,
+    "@aws-cdk/core:enablePartitionLiterals": true,
+    "@aws-cdk/aws-events:eventsTargetQueueSameAccount": true,
+    "@aws-cdk/aws-iam:standardizedServicePrincipals": true,
+    "@aws-cdk/aws-ecs:disableExplicitDeploymentControllerForCircuitBreaker": true,
+    "@aws-cdk/aws-iam:importedRoleStackSafeDefaultPolicyName": true,
+    "@aws-cdk/aws-s3:serverAccessLogsUseBucketPolicy": true,
+    "@aws-cdk/aws-route53-patters:useCertificate": true,
+    "@aws-cdk/customresources:installLatestAwsSdkDefault": false,
+    "@aws-cdk/aws-rds:databaseProxyUniqueResourceName": true,
+    "@aws-cdk/aws-codedeploy:removeAlarmsFromDeploymentGroup": true,
+    "@aws-cdk/aws-apigateway:authorizerChangeDeploymentLogicalId": true,
+    "@aws-cdk/aws-ec2:launchTemplateDefaultUserData": true,
+    "@aws-cdk/aws-secretsmanager:useAttachedSecretResourcePolicyForSecretTargetAttachments": true,
+    "@aws-cdk/aws-redshift:columnId": true,
+    "@aws-cdk/aws-stepfunctions-tasks:enableEmrServicePolicyV2": true,
+    "@aws-cdk/aws-ec2:restrictDefaultSecurityGroup": true,
+    "@aws-cdk/aws-apigateway:requestValidatorUniqueId": true,
+    "params": {
+      "environments": {
+        "dev": {
+          "name": "IES_",
+          "account_id": "1122334455",
+          "region": "us-east-1",
+          "prod": false,
+          "tags": {
+            "Environment": "Dev",
+            "Owner": "Placeholder",
+            "Project": "iot_enabled_sprinkler",
+            "CostCenter": "Placeholder",
+            "LineOfBusiness": "Placeholder"
+          },
+          "rootCa": {
+            "url": "https://www.amazontrust.com/repository/AmazonRootCA1.pem"
+          },
+          "static_thing_group": {
+            "group_name": "IotEnabledSprinklers"
+          },
+          "group_policy": {
+            "policy_name": "IotSprinklerPolicy",
+            "iot_jobs_policy_name": "IotJobsPolicy"
+          },
+          "thing_type": {
+            "thing_type_name": "IotEnabledSprinkler"
+          },
+          "template": {
+            "provisioning_template_name": "IotSprinklerTemplate",
+            "rotation_template_name": "CertRotationTemplate"
+          },
+          "claim_policy": {
+            "policy_name": "FleetProvisioningClaimCertPolicy"
+          },
+          "sns": {
+            "sprinkler_off": {
+              "topic_name": "SprinklerOffTopic"
+            },
+            "sprinkler_on": {
+              "topic_name": "SprinklerOnTopic"
+            },
+            "dd_audit": {
+                "topic_name": "DeviceDefenderAuditTopic"
+            },
+            "dd_defend": {
+                "topic_name": "DeviceDefenderDefendTopic"
+            }
+          },
+          "iotevents": {
+            "input": {
+              "input_name": "SprinklerDetectorModelInput"
+            },
+            "detector_model": {
+              "detector_model_name": "SprinklerDetectorModel"
+            }
+          },
+          "iotanalytics": {
+            "channel": {
+              "sensor_data_channel_name": "SprinklerSoilMoistureSensorDataChannel",
+              "sprinkler_off_channel_name": "SprinklerOffChannel",
+              "sprinkler_on_channel_name": "SprinklerOnChannel"
+            },
+            "datastore": {
+              "sensor_data_datastore_name": "SprinklerSoilMoistureSensorDataDatastore",
+              "sprinkler_off_datastore": "SprinklerOffDatastore",
+              "sprinkler_on_datastore": "SprinklerOnDatastore"
+            },
+            "pipeline": {
+              "sensor_data_pipeline_name": "SprinklerSoilMoistureSensorDataPipeline",
+              "sprinkler_off_pipeline_name": "SprinklerOffPipeline",
+              "sprinkler_on_pipeline_name": "SprinklerOnPipeline"
+            },
+            "dataset": {
+              "sensor_data_dataset_name": "SprinklerSoilMoistureSensorDataDataset",
+              "sprinkler_off_dataset_name": "SprinklerOffDataset",
+              "sprinkler_on_dataset_name": "SprinklerOnDataset"
+            }
+          },
+          "iot_rules_engine": {
+            "soil_moisture_events_sensordata_rule_name": "SoilMoistureEventsSensorData",
+            "soil_moisture_analytics_sensordata_rule_name": "SoilMoistureAnalyticsSensorData",
+            "sprinkler_off_rule_name": "SprinklerOff",
+            "sprinkler_on_rule_name": "SprinklerOn",
+            "cert_rotation_complete_rule_name": "CertificateRotationComplete",
+            "update_firmware_attribute_rule_name": "UpdateFirmwareAttribute",
+            "custom_cert_creation_create_rule": "CustomCaCreateCert"
+          },
+          "s3": {
+            "bucket_name": "iot-enabled-sprinklers"
+          },
+          "cloudwatch": {
+            "metric_name": "waterFlowed_l",
+            "metric_namespace": "IotEnabledSprinklers",
+            "dimensions_name": "Sprinkler Metrics",
+            "dimensions_value_total": "TotalWaterUsed",
+            "dimensions_value_device": "WaterUsedPerDevice"
+          },
+          "device_defender": {
+            "scheduled_audit_name": "DailyAudit",
+            "ml_security_profile_name": "IotEnabledSprinklersMlSecurityProfile",
+            "mitigation_action": "IoTEnabledSprinklersMitigationAction",
+            "quarantine_group": "QuarantinedDevices",
+            "quarantine_group_policy": "QuarantinedDevicesGroupPolicy"
+          },
+          "fleet_hub": {
+            "application": "IoTEnabledSprinklersApplication",
+            "role": "AWSIotFleetHub_iotenabledsprinkler"
+          },
+          "iot_jobs": {
+            "cacert_jobs_template_id": "rootCaCertificateRotation",
+            "cacert_job_document_path": "iot_jobs_template/rootCaUpdateJobDocument.json",
+            "iot_cert_jobs_template_id": "IoTCertificateRotation",
+            "iot_cert_job_document_path": "iot_jobs_template/iotCertUpdateJobDocument.json",
+            "expiring_iot_certs_group": "ExpiringIoTCerts",
+            "iot_certificate_rotation_job_id": "IoTCertificateRotation",
+            "signer_profile_name": "IotEnabledSprinklersECDSASignerProfile",
+            "ota_update_role_name": "IotEnabledSprinklers_FreeRTOSOTAUpdateRole",
+            "expiring_custom_certs_group": "ExpiringCustomCerts",
+            "custom_cert_jobs_template_id": "CustomCertificateRotation",
+            "custom_cert_job_document_path": "iot_jobs_template/customCertUpdateJobDocument.json",
+            "custom_certificate_rotation_job_id": "CustomCertificateRotation"
+          },
+          "jitp": {
+            "role_name": "IoTSprinkerJITPRole"
+          }
+        },
+        "prod": null
+      }
+    }
+  }
+}

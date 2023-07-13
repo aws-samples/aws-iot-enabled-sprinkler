@@ -1,0 +1,14 @@
+{
+    "new_device": true,
+    "flow_rate": 2.3e-05,
+    "abs_hydrated_state_value": 300,
+    "abs_dry_state_value": 600,
+    "sprinkler_trigger_percentage": 27,
+    "message_interval": 2,
+    "version": "1.2",
+    "sensor_type": "capacitive",
+    "plant_id": "AX112B",
+    "provisioningTemplateName": "IES_IotSprinklerTemplate",
+    "rotationTemplateName": "IES_CertRotationTemplate",
+    "currentFirmwareVersion": ""
+}

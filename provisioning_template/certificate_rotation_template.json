@@ -1,0 +1,44 @@
+{
+  "Parameters": {
+    "ThingName": {
+      "Type": "String"
+    },
+    "AWS::IoT::Certificate::Id": {
+      "Type": "String"
+    },
+    "CertificateCreatedOn": {
+      "Type": "String"
+    }
+  },
+  "Resources": {
+    "certificate": {
+      "Properties": {
+        "CertificateId": {
+          "Ref": "AWS::IoT::Certificate::Id"
+        },
+        "Status": "Active"
+      },
+      "Type": "AWS::IoT::Certificate"
+    },
+    "thing": {
+      "OverrideSettings": {
+        "ThingGroups": "DO_NOTHING",
+        "AttributePayload" : "MERGE"
+      },
+      "Properties": {
+        "AttributePayload": {
+            "CertificateCreatedOn": {
+                "Ref": "CertificateCreatedOn"
+            }
+        },
+        "ThingName": {
+          "Ref": "ThingName"
+        },
+        "ThingGroups": [
+          "IotEnabledSprinklers"
+        ]
+      },
+      "Type": "AWS::IoT::Thing"
+    }
+  }
+}
